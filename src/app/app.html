@@ -11,10 +11,13 @@
       <h1>Waiting List</h1>
       @for (item of sourcePlayers; track item) {
         <div
-          class="w-30 h-10 bg-white border border-gray-200 shadow-xl p-3 cursor-move select-none"
+          class="w-30 h-18 bg-white border border-gray-200 shadow-xl p-3 cursor-move select-none"
           cdkDrag
         >
-          {{item}}
+          <span>{{ item.name }}</span>
+          <div>
+            <span class="text-sm text-gray-500">⏱ {{ getWaitingTime(item) }}</span>
+          </div>
         </div>
       }
 
@@ -34,7 +37,7 @@
           <div class="border bg-white w-40 h-15 border-gray-200 shadow-xl p-3 cursor-move select-none" 
             cdkDrag
           >
-            {{ player }}
+            {{ player.name }}
 
           </div>
         }
