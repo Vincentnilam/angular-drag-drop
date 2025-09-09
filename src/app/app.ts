@@ -16,14 +16,28 @@ export class App {
     'Vincent',
   ];
 
-  sourcePlayers = ['Toby', 'Michelle'];
+  sourcePlayers = ['Toby', 'Michelle', 'Matthew', 'Yuen Lin'];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      if (event.container.id === "cdk-drop-list-1") {
+        if (this.players.length == 4) {
+          return;
+        } else {
+          transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+        }
+      } else {
+        transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      }
+      
     }
     
+  }
+
+  clickDone() {
+    this.sourcePlayers = [...this.sourcePlayers, ...this.players];
+    this.players = [];
   }
 }

@@ -1,14 +1,14 @@
 <div class="min-h-screen bg-gray-100">
 
-  <div class="h-screen flex justify-center items-center">
+  <div class="h-screen flex justify-center items-center gap-4">
     <div
       cdkDropList
       #sourceList="cdkDropList"
       [cdkDropListData]="sourcePlayers"
       [cdkDropListConnectedTo]="[playerList]"
-      class="flex gap-2"
-      (cdkDropListDropped)="drop($event)"
+      class="min-h-[200px] w-48 border border-gray-300 bg-white shadow-xl p-3 flex flex-col gap-2"
     >
+      <h1>Waiting List</h1>
       @for (item of sourcePlayers; track item) {
         <div
           class="w-30 h-10 bg-white border border-gray-200 shadow-xl p-3 cursor-move select-none"
@@ -17,27 +17,36 @@
           {{item}}
         </div>
       }
-      
+
     </div>
 
-    <div 
-      cdkDropList
-      #playerList="cdkDropList"
-      [cdkDropListData]="players"
-      [cdkDropListConnectedTo]="[sourceList]"
-      class="ml-2 border border-gray-200 shadow-xl example-list" 
-      (cdkDropListDropped)="drop($event)"
+    <div class="border border-gray-300 shadow-xl p-3 flex flex-col items-center justify-center bg-white">
+      <h1>Court 1</h1>
+      <div 
+        cdkDropList
+        #playerList="cdkDropList"
+        [cdkDropListData]="players"
+        [cdkDropListConnectedTo]="[sourceList]"
+        class="min-h-[200px] w-40 mx-auto shadow-xl example-list" 
+        (cdkDropListDropped)="drop($event)"
+      >
+        @for (player of players; track player) {
+          <div class="border bg-white w-40 h-15 border-gray-200 shadow-xl p-3 cursor-move select-none" 
+            cdkDrag
+          >
+            {{ player }}
 
-    >
-      @for (player of players; track player) {
-        <div class="border bg-white w-40 h-15 border-gray-200 shadow-xl p-3 cursor-move select-none" 
-          cdkDrag
-        >
-          {{ player }}
-
-        </div>
-      }
+          </div>
+        }
+      </div>
+      <button 
+        class="mt-2 border rounded-xl border-gray-500 shadow-xl p-2 cursor-pointer bg-black text-white"
+        (click)="clickDone()"
+      >
+        Done
+      </button>
     </div>
+    
     
   </div>
   
